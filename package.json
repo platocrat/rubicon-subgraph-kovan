@@ -1,0 +1,16 @@
+{
+  "name": "rubicon-kovan",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ platocrat/rubicon-kovan",
+    "create-local": "graph create --node http://localhost:8020/ platocrat/rubicon-kovan",
+    "remove-local": "graph remove --node http://localhost:8020/ platocrat/rubicon-kovan",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 platocrat/rubicon-kovan"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.21.1",
+    "@graphprotocol/graph-ts": "0.20.0"
+  }
+}
