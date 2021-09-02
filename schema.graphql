@@ -1,6 +1,147 @@
-type ExampleEntity @entity {
+# Entities created from RubiconMarket contract.
+
+type UserTrade @entity {
   id: ID!
-  count: BigInt!
-  id: Bytes! # bytes32
-  pair: Bytes! # bytes32
+  isLimit: Boolean!
+	maker: Bytes!
+	taker: Bytes!
+  payGem: Bytes!
+  buyGem: Bytes!
+  payAmount: BigInt!
+  buyAmount: BigInt!
+  completed: Boolean!
+  killed: Boolean!
+  timestamp: BigInt!
+  transactionHash: Bytes!
 }
+
+
+# """
+
+# """
+# type LogItemUpdate @entity {
+#   id: ID!
+# }
+
+# """
+
+# """
+# type LogTrade @entity {
+#   id: ID!
+#   pay_amt: BigInt! # Seller's amount to make this trade.
+#   pay_gem: Bytes! # Address of the seller.
+#   buy_amt: BigInt! # Buyer's amount to take this trade.
+#   buy_gem: Bytes! # Address of the buyer.
+# }
+
+"""
+
+"""
+type LogMake @entity {
+  id: ID!
+  logMakeID: BigInt!
+  pair: Bytes!
+  maker: Bytes!
+  pay_gem: Bytes!
+  buy_gem: Bytes!
+  pay_amt: BigInt!
+  buy_amt: BigInt!
+  timestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# """
+
+# """
+# type LogBump @entity {
+#   id: ID!
+#   pair: Bytes!
+#   maker: Bytes!
+#   pay_gem: Bytes!
+#   buy_gem: Bytes!
+#   pay_amt: BigInt!
+#   buy_amt: BigInt!
+#   timestamp: BigInt!
+# }
+
+"""
+
+"""
+type LogTake @entity {
+  id: ID!
+  logTakeID: BigInt!
+  pair: Bytes!
+  maker: Bytes!
+  taker: Bytes!
+  pay_gem: Bytes!
+  buy_gem: Bytes!
+  take_amt: BigInt!
+  give_amt: BigInt!
+  timestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+"""
+
+"""
+type LogKill @entity {
+  id: ID!
+  logKillID: BigInt!
+  pair: Bytes!
+  maker: Bytes!
+  pay_gem: Bytes!
+  buy_gem: Bytes!
+  pay_amt: BigInt!
+  buy_amt: BigInt!
+  timestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# """
+
+# """
+# type LogInt @entity {
+#   id: ID!
+#   lol: String!
+#   input: BigInt!
+# }
+
+# """
+
+# """
+# type FeeTake @entity {
+#   id: ID!
+#   pair: Bytes!
+#   asset: Bytes!
+#   taker: Bytes!
+#   feeTo: Bytes!
+#   feeAmt: BigInt!
+#   timestamp: BigInt!
+# }
+
+# """
+
+# """
+# type OfferDeleted @entity {
+#   id: ID!
+# }
+
+# Entities created from BathPair contract.
+
+# """
+# StrategistTrade stores information about a strategist's trade from the BathPair contract.
+# """
+# type StrategistTrade @entity {
+#   "ID of the ask for this strategist's trade."
+#   askId: Int!
+#   "Amount of the ask for this strategist's trade."
+#   askAmt: BigInt!
+#   "ID of the bid for this strategist's trade."
+#   bidId: Int!
+#   "Amount of the bid for this strategist's trade."
+#   bidAmt: BigInt!
+#   "Timestamp for this strategist's trade."
+#   timestamp: BigInt!
+#   "Address of the strategist."
+#   strategist: Bytes!
+# }
