@@ -155,7 +155,8 @@ export function handleLogKill(event: LogKill): void {
   logKill.transactionHash = ep._event.transaction.hash
 
   if (userTrade != null) {
-    // Update to the `id` of the emitted LogKill event.
+    // If the trade is killed, we update the `id` of the UserTrade entity
+    // to the `id` of the emitted LogKill event.
     userTrade.id = lkID
     userTrade.isLimit = false
     userTrade.maker = ep.maker
@@ -163,9 +164,9 @@ export function handleLogKill(event: LogKill): void {
     userTrade.payGem = ep.pay_gem
     userTrade.buyGem = ep.buy_gem
     // In the LogTake update, it is `userTrade.payAmount.minus(ep.take_amt)`
-    userTrade.payAmount = ep.buy_amt // <--- is this what we want?
+    userTrade.payAmount = ep.pay_amt
     // In the LogTake update, it is `userTrade.buyAmount.minus(ep.give_amt)`
-    userTrade.buyAmount = ep.buy_amt // <--- is this what we want? 
+    userTrade.buyAmount = ep.buy_amt
 
     userTrade.payAmount == BigInt.fromI32(0)
       ? userTrade.completed == true
@@ -270,8 +271,8 @@ export function handleLogTake(event: LogTake): void {
     userTrade.taker = ep.taker
     userTrade.payGem = ep.pay_gem
     userTrade.buyGem = ep.buy_gem
-    userTrade.payAmount = userTrade.payAmount.minus(ep.take_amt)
-    userTrade.buyAmount = userTrade.buyAmount.plus(ep.give_amt)
+    userTrade.payAmount = ep.give_amt
+    userTrade.buyAmount = ep.take_amt
 
     userTrade.payAmount == BigInt.fromI32(0)
       ? userTrade.completed == true
