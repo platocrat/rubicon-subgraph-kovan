@@ -3,4 +3,4 @@ yarn.lock
 .env
 getSubgraphErrorLogs.md
 build
-./loadUserHistoricTrade.ts
+loadUserHistoricTrade.ts
