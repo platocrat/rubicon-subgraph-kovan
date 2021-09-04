@@ -134,7 +134,6 @@ import { zeroAddress } from "./helpers"
 export function handleLogKill(event: LogKill): void {
   let ep = event.params,
     lkID = ep.id.toHexString(),
-    divisor = BigInt.fromI32(10).pow(18),
     // Create new LogKill entity
     logKill = new LogKillEntity(lkID)
 
@@ -187,9 +186,8 @@ export function handleLogMake(event: LogMake): void {
   // For `LogMake` entity.
   let ep = event.params,
     lmID = ep.id.toHexString(),
-    logMake = new LogMakeEntity(lmID),
-    // Create new LogMake entity
-    divisor = BigInt.fromI32(10).pow(18)
+    // Create new LogMake entity.
+    logMake = new LogMakeEntity(lmID)
 
   // For `UserTrade` entity.
   let userTrade = new UserTrade(lmID)
@@ -242,7 +240,6 @@ export function handleLogMake(event: LogMake): void {
 export function handleLogTake(event: LogTake): void {
   let ep = event.params,
     ltID = ep.id.toHexString(),
-    divisor = BigInt.fromI32(10).pow(18),
     // Create new LogTake entity
     logTake = new LogTakeEntity(ltID)
 

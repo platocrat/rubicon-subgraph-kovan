@@ -85,7 +85,38 @@ dataSources:
         # - event: OfferDeleted(uint256)
         #   handler: handleOfferDeleted
 
-# templates:
+templates:
+  - name: BathToken
+    kind: ethereum/contract
+    network: optimism-kovan
+    source:
+      abi: BathToken
+    mapping: 
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/bathToken.ts
+      entities:
+        - BathToken
+        - BathHouse
+        - RubiconMarket
+      abis:
+        - name: BathToken
+          file: ./abis/rubiconPools/BathToken.json
+        - name: BathHouse
+          file: ./abis/rubiconPools/BathHouse.json
+        - name: RubiconMarket
+          file: ./abis/RubiconMarket.json
+      eventHandlers:
+        # - event: Approval(indexed address,indexed address,uint256)
+        #   handler: handleApproval
+        # - event: Transfer(indexed address,indexed address,uint256)
+        #   handler: handleTransfer
+        # - event: LogInit(uint256)
+        #   handler: handleLogInit
+        - event: Deposit(uint256,address,uint256,address)
+          handler: handleDeposit
+
 #   - name: BathPair
 #     kind: ethereum/contract
 #     network: kovan
@@ -112,34 +143,3 @@ dataSources:
 #           handler: handleLogStrategistTrade
 #         - event: StrategistRewardClaim(address,address,uint256,uint256)
 #           handler: handleStrategistRewardClaim
-
-#   - name: BathToken
-#     kind: ethereum/contract
-#     network: kovan
-#     source:
-#       abi: BathToken
-#     mapping: 
-#       kind: ethereum/events
-#       apiVersion: 0.0.4
-#       language: wasm/assemblyscript
-#       file: ./src/mappings/bathToken.ts
-#       entities:
-#         - BathToken
-#         - BathHouse
-#         - RubiconMarket
-#       abis:
-#         - name: BathToken
-#           file: ./abis/rubiconPools/BathToken.json
-#         - name: BathHouse
-#           file: ./abis/rubiconPools/BathHouse.json
-#         - name: RubiconMarket
-#           file: ./abis/RubiconMarket.json
-#       eventHandlers:
-#         - event: Approval(indexed address,indexed address,uint256)
-#           handler: handleApproval
-#         - event: Transfer(indexed address,indexed address,uint256)
-#           handler: handleTransfer
-#         - event: LogInit(uint256)
-#           handler: handleLogInit
-#         - event: Deposit(uint256,address,uint256,address)
-#           handler: handleDeposit

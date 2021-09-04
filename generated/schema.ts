@@ -486,3 +486,70 @@ export class LogKill extends Entity {
     this.set("transactionHash", Value.fromBytes(value));
   }
 }
+
+export class Deposit extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Deposit entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Deposit entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Deposit", id.toString(), this);
+  }
+
+  static load(id: string): Deposit | null {
+    return store.get("Deposit", id) as Deposit | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get depositedAmt(): BigInt {
+    let value = this.get("depositedAmt");
+    return value.toBigInt();
+  }
+
+  set depositedAmt(value: BigInt) {
+    this.set("depositedAmt", Value.fromBigInt(value));
+  }
+
+  get asset(): Bytes {
+    let value = this.get("asset");
+    return value.toBytes();
+  }
+
+  set asset(value: Bytes) {
+    this.set("asset", Value.fromBytes(value));
+  }
+
+  get sharesReceived(): BigInt {
+    let value = this.get("sharesReceived");
+    return value.toBigInt();
+  }
+
+  set sharesReceived(value: BigInt) {
+    this.set("sharesReceived", Value.fromBigInt(value));
+  }
+
+  get depositor(): Bytes {
+    let value = this.get("depositor");
+    return value.toBytes();
+  }
+
+  set depositor(value: Bytes) {
+    this.set("depositor", Value.fromBytes(value));
+  }
+}

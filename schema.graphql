@@ -1,5 +1,9 @@
+# -------------------------------------------------
 # Entities created from RubiconMarket contract.
-
+# -------------------------------------------------
+"""
+UserTrade model, a custom model to represent an individual user's trade state.
+"""
 type UserTrade @entity {
   id: ID!
   isLimit: Boolean!
@@ -126,7 +130,9 @@ type LogKill @entity {
 #   id: ID!
 # }
 
+# -------------------------------------------------
 # Entities created from BathPair contract.
+# -------------------------------------------------
 
 # """
 # StrategistTrade stores information about a strategist's trade from the BathPair contract.
@@ -145,3 +151,21 @@ type LogKill @entity {
 #   "Address of the strategist."
 #   strategist: Bytes!
 # }
+
+# -------------------------------------------------
+# Entities created from BathToken contract
+# -------------------------------------------------
+"""
+Deposit event emitted by the BathToken contract when `deposit` is called.
+"""
+type Deposit @entity {
+  id: ID!
+  "Amount deposited."
+  depositedAmt: BigInt!
+  "Address of the asset deposited." 
+  asset: Bytes!
+  "Amount of shares received."
+  sharesReceived: BigInt!
+  "Address of the depositor."
+  depositor: Bytes!
+}
