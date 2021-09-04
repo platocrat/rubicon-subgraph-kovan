@@ -97,16 +97,14 @@ templates:
       language: wasm/assemblyscript
       file: ./src/mappings/bathToken.ts
       entities:
-        - BathToken
-        - BathHouse
-        - RubiconMarket
+        - Deposit
       abis:
         - name: BathToken
           file: ./abis/rubiconPools/BathToken.json
-        - name: BathHouse
-          file: ./abis/rubiconPools/BathHouse.json
-        - name: RubiconMarket
-          file: ./abis/RubiconMarket.json
+        # - name: BathHouse
+        #   file: ./abis/rubiconPools/BathHouse.json
+        # - name: RubiconMarket
+        #   file: ./abis/RubiconMarket.json
       eventHandlers:
         # - event: Approval(indexed address,indexed address,uint256)
         #   handler: handleApproval

@@ -1,5 +1,5 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts"
-import { /* BathToken, */ Deposit } from "../../generated/templates/BathToken/BathToken"
+import { Deposit } from "../../generated/templates/BathToken/BathToken"
 import { Deposit as DepositEntity } from "../../generated/schema"
 
 export function handleDeposit(event: Deposit): void {
