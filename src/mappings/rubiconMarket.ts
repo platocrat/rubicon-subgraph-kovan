@@ -141,9 +141,6 @@ export function handleLogKill(event: LogKill): void {
   let userTrade = UserTrade.load(lkID)
 
   logKill.id = lkID
-  // logKillID returns a rather large BigInt value.
-  // Example logKillID value: 15901623583005458966249677506686266642
-  logKill.logKillID = BigInt.fromUnsignedBytes(ep.id)
   logKill.pair = ep.pair
   logKill.maker = ep.maker
   logKill.pay_gem = ep.pay_gem
@@ -193,9 +190,6 @@ export function handleLogMake(event: LogMake): void {
   let userTrade = new UserTrade(lmID)
 
   logMake.id = lmID
-  // `logMakeID` returns a rather large BigInt value.
-  // Example `logMakeID` value: 12367929453448690307083082505200429610
-  logMake.logMakeID = BigInt.fromUnsignedBytes(ep.id)
   logMake.pair = ep.pair
   logMake.maker = ep.maker
   logMake.pay_gem = ep.pay_gem
@@ -247,9 +241,6 @@ export function handleLogTake(event: LogTake): void {
   let userTrade = UserTrade.load(ltID)
 
   logTake.id = ltID
-  // logTakeID returns a rather large BigInt value.
-  // Example logTakeID value: 6332379880165729437226538242662619960725702286402218345907
-  logTake.logTakeID = BigInt.fromUnsignedBytes(ep.id)
   logTake.pair = ep.pair
   logTake.maker = ep.maker
   logTake.taker = ep.taker
