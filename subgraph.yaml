@@ -110,8 +110,8 @@ templates:
         #   handler: handleApproval
         # - event: Transfer(indexed address,indexed address,uint256)
         #   handler: handleTransfer
-        # - event: LogInit(uint256)
-        #   handler: handleLogInit
+        - event: LogInit(uint256)
+          handler: handleLogInit
         - event: Deposit(uint256,address,uint256,address)
           handler: handleDeposit
 

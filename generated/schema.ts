@@ -172,15 +172,6 @@ export class LogMake extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get logMakeID(): BigInt {
-    let value = this.get("logMakeID");
-    return value.toBigInt();
-  }
-
-  set logMakeID(value: BigInt) {
-    this.set("logMakeID", Value.fromBigInt(value));
-  }
-
   get pair(): Bytes {
     let value = this.get("pair");
     return value.toBytes();
@@ -282,15 +273,6 @@ export class LogTake extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get logTakeID(): BigInt {
-    let value = this.get("logTakeID");
-    return value.toBigInt();
-  }
-
-  set logTakeID(value: BigInt) {
-    this.set("logTakeID", Value.fromBigInt(value));
   }
 
   get pair(): Bytes {
@@ -403,15 +385,6 @@ export class LogKill extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get logKillID(): BigInt {
-    let value = this.get("logKillID");
-    return value.toBigInt();
-  }
-
-  set logKillID(value: BigInt) {
-    this.set("logKillID", Value.fromBigInt(value));
   }
 
   get pair(): Bytes {
@@ -551,5 +524,45 @@ export class Deposit extends Entity {
 
   set depositor(value: Bytes) {
     this.set("depositor", Value.fromBytes(value));
+  }
+}
+
+export class LogInit extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save LogInit entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save LogInit entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("LogInit", id.toString(), this);
+  }
+
+  static load(id: string): LogInit | null {
+    return store.get("LogInit", id) as LogInit | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get timeOfInit(): BigInt {
+    let value = this.get("timeOfInit");
+    return value.toBigInt();
+  }
+
+  set timeOfInit(value: BigInt) {
+    this.set("timeOfInit", Value.fromBigInt(value));
   }
 }

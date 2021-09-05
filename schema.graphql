@@ -166,3 +166,13 @@ type Deposit @entity {
   "Address of the depositor."
   depositor: Bytes!
 }
+
+"""
+LogInit event emitted by the BathToken contract when it is initialized.
+"""
+type LogInit @entity {
+  "Address of the BathToken contract that emitted this LogInit event."
+  id: ID!
+  "The block.timestamp of when the BathToken contract was initialized."
+  timeOfInit: BigInt!
+}
