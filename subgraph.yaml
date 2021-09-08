@@ -11,7 +11,7 @@ dataSources:
       address: "0x1D44E2c486470Ccc8c72f38E816340569Ca9D98F"
       # address: "0x66EF90859982DF25b6Ab627f044910B04A60aFc0" # THIS IS FOR OPTIMISTIC MAINNET
       abi: RubiconMarket
-      startBlock: 1066453
+      startBlock: 1060453
       # startBlock: 660180 # THIS IS FOR OPTIMISTIC MAINNET
     mapping:
       kind: ethereum/events
@@ -98,13 +98,14 @@ templates:
       file: ./src/mappings/bathToken.ts
       entities:
         - Deposit
+        - LogInit
       abis:
         - name: BathToken
           file: ./abis/rubiconPools/BathToken.json
-        # - name: BathHouse
-        #   file: ./abis/rubiconPools/BathHouse.json
-        # - name: RubiconMarket
-        #   file: ./abis/RubiconMarket.json
+        - name: BathHouse
+          file: ./abis/rubiconPools/BathHouse.json
+        - name: RubiconMarket
+          file: ./abis/RubiconMarket.json
       eventHandlers:
         # - event: Approval(indexed address,indexed address,uint256)
         #   handler: handleApproval
