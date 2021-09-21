@@ -8,8 +8,7 @@ dataSources:
     network: optimism-kovan
     # network: optimism # THIS IS FOR OPTIMISTIC MAINNET
     source:
-      address: "0x1D44E2c486470Ccc8c72f38E816340569Ca9D98F"
-      # address: "0x66EF90859982DF25b6Ab627f044910B04A60aFc0" # THIS IS FOR OPTIMISTIC MAINNET
+      address: "0x5ddDa7DF721272106af1904abcc64E76AB2019d2"
       abi: RubiconMarket
       startBlock: 1060453
       # startBlock: 660180 # THIS IS FOR OPTIMISTIC MAINNET
