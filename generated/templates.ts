@@ -6,14 +6,14 @@ import {
   DataSourceContext
 } from "@graphprotocol/graph-ts";
 
-export class BathToken extends DataSourceTemplate {
+export class RubiconMarket extends DataSourceTemplate {
   static create(address: Address): void {
-    DataSourceTemplate.create("BathToken", [address.toHex()]);
+    DataSourceTemplate.create("RubiconMarket", [address.toHex()]);
   }
 
   static createWithContext(address: Address, context: DataSourceContext): void {
     DataSourceTemplate.createWithContext(
-      "BathToken",
+      "RubiconMarket",
       [address.toHex()],
       context
     );
