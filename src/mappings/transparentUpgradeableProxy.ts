@@ -10,8 +10,10 @@ import {
   Implementation as ImplementationEntity,
   Upgraded as UpgradedEntity,
 } from "../../generated/schema"
-import { zeroAddress } from "./helpers"
+import { createMarket, zeroAddress } from "./helpers"
 import { RubiconMarket } from "../../generated/templates"
+import { createRubiconMarket } from './helpers'
+
 export function handleAdminChanged(event: AdminChanged): void {
   let ep = event.params,
     // Set the ID of this entity to the address of this event.
@@ -42,6 +44,9 @@ export function handleImplementation(event: Implementation): void {
 
   // Instantiate RubiconMarket implementation.
   RubiconMarket.create(contractAddress)
+
+  let rubiconMarket = createMarket(contractAddress, event)
+  rubiconMarket.save()
 }
 
 export function handleUpgraded(event: Upgraded): void {

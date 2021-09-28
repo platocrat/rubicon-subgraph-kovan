@@ -9,10 +9,10 @@ dataSources:
     source:
       address: "0x5ddDa7DF721272106af1904abcc64E76AB2019d2"
       abi: TransparentUpgradeableProxy
-      # startBlock: 1060453
+      startBlock: 1587110
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/mappings/transparentUpgradeableProxy.ts
       entities:
@@ -40,7 +40,7 @@ templates:
       abi: RubiconMarket
     mapping: 
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/mappings/rubiconMarket.ts
       entities:
@@ -58,7 +58,7 @@ templates:
         # - LogMinSell
         # - LogNote
         # - LogSetAuthority
-        # - LogSetOwner
+        - LogSetOwner
         # - LogSortedOffer
         - LogTake
         # - LogTrade
@@ -86,7 +86,6 @@ templates:
           handler: handleLogKill
         - event: LogMake(indexed bytes32,indexed bytes32,indexed address,address,address,uint128,uint128,uint64)
           handler: handleLogMake
-        # TODO: Might add.
         # - event: LogMatch(uint256,uint256)
         #   handler: handleLogMatch
         # - event: LogMatchingEnabled(bool)
@@ -97,8 +96,8 @@ templates:
         #   handler: handleLogNote
         # - event: LogSetAuthority(indexed address)
         #   handler: handleLogSetAuthority
-        # - event: LogSetOwner(indexed address)
-        #   handler: handleLogSetOwner
+        - event: LogSetOwner(indexed address)
+          handler: handleLogSetOwner
         # - event: LogSortedOffer(uint256)
         #   handler: handleLogSortedOffer
         - event: LogTake(bytes32,indexed bytes32,indexed address,address,address,indexed address,uint128,uint128,uint64)
@@ -109,59 +108,3 @@ templates:
         #   handler: handleLogUnsortedOffer
         # - event: OfferDeleted(uint256)
         #   handler: handleOfferDeleted
-  # - name: BathToken
-  #   kind: ethereum/contract
-  #   network: optimism-kovan
-  #   source:
-  #     abi: BathToken
-  #   mapping: 
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.5
-  #     language: wasm/assemblyscript
-  #     file: ./src/mappings/bathToken.ts
-  #     entities:
-  #       - Deposit
-  #       - LogInit
-  #     abis:
-  #       - name: BathToken
-  #         file: ./abis/rubiconPools/BathToken.json
-  #       - name: BathHouse
-  #         file: ./abis/rubiconPools/BathHouse.json
-  #       - name: RubiconMarket
-  #         file: ./abis/RubiconMarket.json
-  #      eventHandlers:
-  #       # - event: Approval(indexed address,indexed address,uint256)
-  #       #   handler: handleApproval
-  #       # - event: Transfer(indexed address,indexed address,uint256)
-  #       #   handler: handleTransfer
-  #       - event: LogInit(uint256)
-  #         handler: handleLogInit
-  #       - event: Deposit(uint256,address,uint256,address)
-  #         handler: handleDeposit
-
-#   - name: BathPair
-#     kind: ethereum/contract
-#     network: kovan
-#     source:
-#       abi: BathPair
-#     mapping: 
-#       kind: ethereum/events
-#       apiVersion: 0.0.5
-#       language: wasm/assemblyscript
-#       file: ./src/mappings/bathPair.ts
-#       entities:
-#         - BathPair
-#         - BathHouse
-#         - BathToken
-#       abis:
-#         - name: BathPair
-#           file: ./abis/rubiconPools/BathPair.json
-#         - name: BathHouse
-#           file: ./abis/rubiconPools/BathHouse.json
-#         - name: BathToken
-#           file: ./abis/rubiconPools/BathToken.json
-#       eventHandlers:
-#         - event: LogStrategistTrade(uint256,uint256,uint256,uint256,uint256,address)
-#           handler: handleLogStrategistTrade
-#         - event: StrategistRewardClaim(address,address,uint256,uint256)
-#           handler: handleStrategistRewardClaim

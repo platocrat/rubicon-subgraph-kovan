@@ -127,6 +127,23 @@ type LogKill @entity {
   transactionHash: Bytes!
 }
 
+"""
+
+"""
+type LogSetOwner @entity {
+  id: ID!
+  owner: Bytes!
+}
+
+"""
+RubiconMarket entity is analogous to `LogSetOwner` entity, but is only used to
+enable the `rubiconMarket.ts` mapping
+"""
+type RubiconMarket @entity {
+  id: ID!
+  owner: Bytes!
+}
+
 # """
 
 # """

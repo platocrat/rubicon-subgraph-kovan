@@ -589,6 +589,86 @@ export class LogKill extends Entity {
   }
 }
 
+export class LogSetOwner extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save LogSetOwner entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save LogSetOwner entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("LogSetOwner", id.toString(), this);
+  }
+
+  static load(id: string): LogSetOwner | null {
+    return store.get("LogSetOwner", id) as LogSetOwner | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+}
+
+export class RubiconMarket extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save RubiconMarket entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save RubiconMarket entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("RubiconMarket", id.toString(), this);
+  }
+
+  static load(id: string): RubiconMarket | null {
+    return store.get("RubiconMarket", id) as RubiconMarket | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+}
+
 export class Deposit extends Entity {
   constructor(id: string) {
     super();

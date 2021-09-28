@@ -1,6 +1,5 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts"
 import {
-  RubiconMarket,
   // FeeTake,
   // LogBump,
   // LogBuyEnabled,
@@ -15,20 +14,23 @@ import {
   // LogMinSell,
   // LogNote,
   // LogSetAuthority,
-  // LogSetOwner,
+  LogSetOwner,
   // LogSortedOffer,
   LogTake,
   // LogTrade,
   // LogUnsortedOffer,
   // OfferDeleted
 } from "../../generated/RubiconMarket/RubiconMarket"
+import { RubiconMarket } from '../../generated/templates'
 import {
   LogKill as LogKillEntity,
   LogMake as LogMakeEntity,
   LogTake as LogTakeEntity,
+  LogSetOwner as LogSetOwnerEntity,
   UserTrade
 } from "../../generated/schema"
-import { zeroAddress } from "./helpers"
+import { createRubiconMarket, zeroAddress } from "./helpers"
+
 
 export function handleLogKill(event: LogKill): void {
   let ep = event.params,
@@ -126,7 +128,21 @@ export function handleLogMake(event: LogMake): void {
 
 // export function handleLogSetAuthority(event: LogSetAuthority): void { }
 
-// export function handleLogSetOwner(event: LogSetOwner): void { }
+export function handleLogSetOwner(event: LogSetOwner): void {
+  // For `LogSetOwner` entity.
+  let logSetOwnerID = event.params._event.address.toHexString(),
+    // Create new LogSetOwner entity.
+    logSetOwner = new LogSetOwnerEntity(logSetOwnerID)
+
+  logSetOwner.id = logSetOwnerID
+  logSetOwner.owner = event.params.owner
+  logSetOwner.save()
+
+  RubiconMarket.create(event.address)
+
+  let rubiconMarket = createRubiconMarket(event.address, event)
+  rubiconMarket.save()
+}
 
 // export function handleLogSortedOffer(event: LogSortedOffer): void { }
 
