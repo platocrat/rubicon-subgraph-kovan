@@ -1,4 +1,4 @@
-import { Address, BigInt } from "@graphprotocol/graph-ts"
+import { Address, BigInt, log } from "@graphprotocol/graph-ts"
 import {
   // FeeTake,
   // LogBump,
@@ -37,6 +37,17 @@ export function handleLogKill(event: LogKill): void {
     lkID = ep.id.toHexString(),
     // Create new LogKill entity
     logKill = new LogKillEntity(lkID)
+
+  /**
+   * @todo This log.warning is not being logged
+  */
+  log.warning(
+    'This is the first test of a log.warning... First is the id of logKill, then the buy_gem address:  ',
+    [
+      logKill.id,
+      logKill.buy_gem.toHexString()
+    ]
+  )
 
   // For `UserTrade` entity.
   let userTrade = UserTrade.load(lkID)

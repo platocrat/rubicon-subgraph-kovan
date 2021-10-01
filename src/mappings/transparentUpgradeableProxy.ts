@@ -1,4 +1,4 @@
-import { Address, BigInt } from "@graphprotocol/graph-ts"
+import { Address, BigInt, log } from "@graphprotocol/graph-ts"
 import {
   TransparentUpgradeableProxy,
   AdminChanged,
@@ -21,6 +21,17 @@ export function handleAdminChanged(event: AdminChanged): void {
     // Create new AdminChanged entity
     adminChanged = new AdminChangedEntity(adminChangedID)
 
+  /**
+   * @todo This log.warning is not being logged
+   */
+  log.warning(
+    'This is the first test of a log.warning: \n first is the implementation ID \n second is the currentImplementation address  ',
+    [
+      adminChanged.id,
+      adminChanged.previousAdmin.toHexString()
+    ]
+  )
+
   adminChanged.id = adminChangedID
   adminChanged.previousAdmin = ep.previousAdmin
   adminChanged.newAdmin = ep.newAdmin
@@ -39,6 +50,17 @@ export function handleImplementation(event: Implementation): void {
   implementation.currentImplementation = ep.currentImplementation
 
   implementation.save()
+
+  /**
+   * @todo This log.warning is not being logged
+   */
+  log.warning(
+    'This is the first test of a log.warning... First is the id address, then the currentImplemention address:  ',
+    [
+      implementation.id,
+      implementation.currentImplementation.toHexString()
+    ]
+  )
 
   let contractAddress = ep.currentImplementation
 
