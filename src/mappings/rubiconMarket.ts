@@ -38,21 +38,10 @@ export function handleLogKill(event: LogKill): void {
     // Create new LogKill entity
     logKill = new LogKillEntity(lkID)
 
-  /**
-   * @todo This log.warning is not being logged
-  */
-  log.warning(
-    'This is the first test of a log.warning... First is the id of logKill, then the buy_gem address:  ',
-    [
-      logKill.id,
-      logKill.buy_gem.toHexString()
-    ]
-  )
-
   // For `UserTrade` entity.
   let userTrade = UserTrade.load(lkID)
 
-  logKill.id = lkID
+  logKill.id = lkID + '-' + ep._event.transaction.hash.toHexString()
   logKill.pair = ep.pair
   logKill.maker = ep.maker
   logKill.pay_gem = ep.pay_gem
@@ -65,7 +54,7 @@ export function handleLogKill(event: LogKill): void {
   if (userTrade != null) {
     // If the trade is killed, we update the `id` of the UserTrade entity
     // to the `id` of the emitted LogKill event.
-    userTrade.id = lkID
+    userTrade.id = lkID + '-' + ep._event.transaction.hash.toHexString()
     userTrade.isLimit = false
     userTrade.maker = ep.maker
     userTrade.taker = userTrade.taker
@@ -101,7 +90,7 @@ export function handleLogMake(event: LogMake): void {
   // For `UserTrade` entity.
   let userTrade = new UserTrade(lmID)
 
-  logMake.id = lmID
+  logMake.id = lmID + '-' + ep._event.transaction.hash.toHexString()
   logMake.pair = ep.pair
   logMake.maker = ep.maker
   logMake.pay_gem = ep.pay_gem
@@ -112,7 +101,7 @@ export function handleLogMake(event: LogMake): void {
   logMake.transactionHash = ep._event.transaction.hash
 
   // Set to the `id` of the emitted LogMake event.
-  userTrade.id = lmID
+  userTrade.id = lmID + '-' + ep._event.transaction.hash.toHexString()
   userTrade.isLimit = true
   userTrade.maker = ep.maker
   userTrade.taker = Address.fromString(zeroAddress)
@@ -145,7 +134,7 @@ export function handleLogSetOwner(event: LogSetOwner): void {
     // Create new LogSetOwner entity.
     logSetOwner = new LogSetOwnerEntity(logSetOwnerID)
 
-  logSetOwner.id = logSetOwnerID
+  logSetOwner.id = logSetOwnerID + '-' + event.params._event.transaction.hash.toHexString()
   logSetOwner.owner = event.params.owner
   logSetOwner.save()
 
@@ -166,7 +155,7 @@ export function handleLogTake(event: LogTake): void {
   // For `UserTrade` entity.
   let userTrade = UserTrade.load(ltID)
 
-  logTake.id = ltID
+  logTake.id = ltID + '-' + ep._event.transaction.hash.toHexString()
   logTake.pair = ep.pair
   logTake.maker = ep.maker
   logTake.taker = ep.taker
@@ -179,7 +168,7 @@ export function handleLogTake(event: LogTake): void {
 
   if (userTrade != null) {
     // Update to the `id` of the emitted LogTake event.
-    userTrade.id = ltID
+    userTrade.id = ltID + '-' + ep._event.transaction.hash.toHexString()
     userTrade.isLimit = false
     userTrade.maker = ep.maker
     userTrade.taker = ep.taker
