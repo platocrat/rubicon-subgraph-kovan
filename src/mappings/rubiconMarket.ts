@@ -135,13 +135,16 @@ export function handleLogSetOwner(event: LogSetOwner): void {
     logSetOwner = new LogSetOwnerEntity(logSetOwnerID)
 
   logSetOwner.id = logSetOwnerID + '-' + event.params._event.transaction.hash.toHexString()
+
+  // log.warning('This is the log set owner address and the ID of the log set owner event: ',
+  //   [
+  //     logSetOwner.owner.toHexString(),
+  //     logSetOwner.id
+  //   ]
+  // )
+  // logSetOwner.id = null
   logSetOwner.owner = event.params.owner
   logSetOwner.save()
-
-  RubiconMarket.create(event.address)
-
-  let rubiconMarket = createRubiconMarket(event.address, event)
-  rubiconMarket.save()
 }
 
 // export function handleLogSortedOffer(event: LogSortedOffer): void { }
