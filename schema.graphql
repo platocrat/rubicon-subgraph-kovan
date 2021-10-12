@@ -20,27 +20,74 @@ type UserTrade @entity {
 }
 
 
-# """
+type FeeTake @entity {
+  id: ID!
+  pair: Bytes!
+  asset: Bytes!
+  taker: Bytes!
+  feeTo: Bytes!
+  feeAmt: BigInt!
+  timestamp: BigInt!
+}
 
-# """
-# type LogItemUpdate @entity {
-#   id: ID!
-# }
+type LogBump @entity {
+  id: ID!
+  pair: Bytes!
+  maker: Bytes!
+  pay_gem: Bytes!
+  buy_gem: Bytes!
+  pay_amt: BigInt!
+  buy_amt: BigInt!
+  timestamp: BigInt!
+}
 
-# """
 
-# """
-# type LogTrade @entity {
-#   id: ID!
-#   pay_amt: BigInt! # Seller's amount to make this trade.
-#   pay_gem: Bytes! # Address of the seller.
-#   buy_amt: BigInt! # Buyer's amount to take this trade.
-#   buy_gem: Bytes! # Address of the buyer.
-# }
+type LogBuyEnabled @entity {
+  id: ID!
+  isEnabled: Boolean!
+}
 
-"""
+type LogDelete @entity {
+  "ID of this entity"
+  id: ID!
+  keeper: Bytes!
+  "ID given to this event by the contract"
+  logDeleteID: String! 
+}
 
-"""
+type LogInsert @entity {
+  "ID of this entity"
+  id: ID!
+  keeper: Bytes!
+  "ID given to this event by the contract"
+  logInsertID: String! 
+}
+
+type LogInt @entity {
+  id: ID!
+  lol: String!
+  input: BigInt! 
+}
+
+type LogItemUpdate @entity {
+  "ID of this entity"
+  id: ID!
+  "ID given to this event by the contract"
+  logItemUpdateID: String!
+}
+
+type LogKill @entity {
+  id: ID!
+  pair: Bytes!
+  maker: Bytes!
+  pay_gem: Bytes!
+  buy_gem: Bytes!
+  pay_amt: BigInt!
+  buy_amt: BigInt!
+  timestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type LogMake @entity {
   id: ID!
   pair: Bytes!
@@ -53,23 +100,55 @@ type LogMake @entity {
   transactionHash: Bytes!
 }
 
-# """
+type LogMatch @entity {
+  "ID of this entity"
+  id: ID!
+  "ID given to this event by the contract"
+  logMatchID: String!
+  amount: BigInt!
+}
 
-# """
-# type LogBump @entity {
-#   id: ID!
-#   pair: Bytes!
-#   maker: Bytes!
-#   pay_gem: Bytes!
-#   buy_gem: Bytes!
-#   pay_amt: BigInt!
-#   buy_amt: BigInt!
-#   timestamp: BigInt!
-# }
+type LogMatchingEnabled @entity {
+  id: ID!
+  isEnabled: Boolean!
+}
 
-"""
+type LogMinSell @entity {
+  "ID of this entity"
+  id: ID!
+  pay_gem: Bytes!
+  min_amount: BigInt!
+}
 
-"""
+type LogNote @entity {
+  "ID of this entity"
+  id: ID!
+  sig: Bytes!
+  guy: Bytes!
+  foo: Bytes!
+  bar: Bytes!
+  wad: BigInt!
+  fax: Bytes!
+}
+
+type LogSetAuthority @entity {
+  "ID of this entity"
+  id: ID!
+  authority: Bytes!
+}
+
+type LogSetOwner @entity {
+  id: ID!
+  owner: Bytes
+}
+
+type LogSortedOffer @entity {
+  "ID of this entity"
+  id: ID!
+  "ID given to this event by the contract"
+  logSortedOfferID: String!
+}
+
 type LogTake @entity {
   id: ID!
   pair: Bytes!
@@ -83,28 +162,34 @@ type LogTake @entity {
   transactionHash: Bytes!
 }
 
-"""
-
-"""
-type LogKill @entity {
+type LogTrade @entity {
   id: ID!
-  pair: Bytes!
-  maker: Bytes!
-  pay_gem: Bytes!
-  buy_gem: Bytes!
+  "Seller's amount to make this trade"
   pay_amt: BigInt!
+  "Address of the seller" 
+  pay_gem: Bytes! 
+  "Buyer's amount to take this trade"
   buy_amt: BigInt!
-  timestamp: BigInt!
-  transactionHash: Bytes!
+  "Address of the buyer"
+  buy_gem: Bytes! 
 }
 
-"""
-
-"""
-type LogSetOwner @entity {
+type LogUnsortedOffer @entity {
+  "ID of this entity"
   id: ID!
-  owner: Bytes!
+  "ID given to this event by the contract"
+  logUnsortedOfferID: String!
 }
+
+type OfferDeleted @entity {
+  id: ID!
+  "ID given to this event by the contract"
+  offerDeletedID: String!
+}
+
+
+
+
 
 """
 RubiconMarket entity is analogous to `LogSetOwner` entity, but is only used to
@@ -112,37 +197,9 @@ enable the `rubiconMarket.ts` mapping
 """
 type RubiconMarket @entity {
   id: ID!
-  owner: Bytes!
+  owner: Bytes
 }
 
-# """
-
-# """
-# type LogInt @entity {
-#   id: ID!
-#   lol: String!
-#   input: BigInt!
-# }
-
-# """
-
-# """
-# type FeeTake @entity {
-#   id: ID!
-#   pair: Bytes!
-#   asset: Bytes!
-#   taker: Bytes!
-#   feeTo: Bytes!
-#   feeAmt: BigInt!
-#   timestamp: BigInt!
-# }
-
-# """
-
-# """
-# type OfferDeleted @entity {
-#   id: ID!
-# }
 
 # -------------------------------------------------
 # Entities created from BathPair contract.
@@ -165,31 +222,3 @@ type RubiconMarket @entity {
 #   "Address of the strategist."
 #   strategist: Bytes!
 # }
-
-# -------------------------------------------------
-# Entities created from BathToken contract
-# -------------------------------------------------
-"""
-Deposit event emitted by the BathToken contract when `deposit` is called.
-"""
-type Deposit @entity {
-  id: ID!
-  "Amount deposited."
-  depositedAmt: BigInt!
-  "Address of the asset deposited." 
-  asset: Bytes!
-  "Amount of shares received."
-  sharesReceived: BigInt!
-  "Address of the depositor."
-  depositor: Bytes!
-}
-
-"""
-LogInit event emitted by the BathToken contract when it is initialized.
-"""
-type LogInit @entity {
-  "Address of the BathToken contract that emitted this LogInit event."
-  id: ID!
-  "The block.timestamp of when the BathToken contract was initialized."
-  timeOfInit: BigInt!
-}

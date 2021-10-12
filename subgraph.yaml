@@ -7,77 +7,77 @@ dataSources:
     name: RubiconMarket
     network: optimism-kovan
     source:
-      address: "0x5ddDa7DF721272106af1904abcc64E76AB2019d2"
+      # This is a proxy address
+      address: "" 
       abi: RubiconMarket
       startBlock: 1577110
     mapping: 
       kind: ethereum/events
       apiVersion: 0.0.5
-      language: wasm/assemblyscript
       file: ./src/mappings/rubiconMarket.ts
+      language: wasm/assemblyscript
       entities:
-        # - FeeTake
-        # - LogBump
-        # - LogBuyEnabled
-        # - LogDelete
-        # - LogInsert
-        # - LogInt
-        # - LogItemUpdate
+        - FeeTake
+        - LogBump
+        - LogBuyEnabled
+        - LogDelete
+        - LogInsert
+        - LogInt
+        - LogItemUpdate
         - LogKill
         - LogMake
-        # - LogMatch
-        # - LogMatchingEnabled
-        # - LogMinSell
-        # - LogNote
+        - LogMatch
+        - LogMatchingEnabled
+        - LogMinSell
+        - LogNote
         - LogSetAuthority
         - LogSetOwner
-        # - LogSortedOffer
+        - LogSortedOffer
         - LogTake
-        # - LogTrade
-        # - LogUnsortedOffer
-        # - OfferDeleted
+        - LogTrade
+        - LogUnsortedOffer
+        - OfferDeleted
       abis:
         - name: RubiconMarket
           file: ./abis/RubiconMarket.json
       eventHandlers:
-        # - event: FeeTake(bytes32,indexed bytes32,address,indexed address,address,uint256,uint64)
-        #   handler: handleFeeTake
-        # - event: LogBump(indexed bytes32,indexed bytes32,indexed address,address,address,uint128,uint128,uint64)
-        #   handler: handleLogBump
-        # - event: LogBuyEnabled(bool)
-        #   handler: handleLogBuyEnabled
-        # - event: LogDelete(address,uint256)
-        #   handler: handleLogDelete
-        # - event: LogInsert(address,uint256)
-        #   handler: handleLogInsert
-        # - event: LogInt(string,uint256)
-        #   handler: handleLogInt
-        # - event: LogItemUpdate(uint256)
-        #   handler: handleLogItemUpdate
+        - event: FeeTake(bytes32,indexed bytes32,address,indexed address,address,uint256,uint64)
+          handler: handleFeeTake
+        - event: LogBump(indexed bytes32,indexed bytes32,indexed address,address,address,uint128,uint128,uint64)
+          handler: handleLogBump
+        - event: LogBuyEnabled(bool)
+          handler: handleLogBuyEnabled
+        - event: LogDelete(address,uint256)
+          handler: handleLogDelete
+        - event: LogInsert(address,uint256)
+          handler: handleLogInsert
+        - event: LogInt(string,uint256)
+          handler: handleLogInt
+        - event: LogItemUpdate(uint256)
+          handler: handleLogItemUpdate
         - event: LogKill(indexed bytes32,indexed bytes32,indexed address,address,address,uint128,uint128,uint64)
           handler: handleLogKill
         - event: LogMake(indexed bytes32,indexed bytes32,indexed address,address,address,uint128,uint128,uint64)
           handler: handleLogMake
-        # TODO: Might add.
-        # - event: LogMatch(uint256,uint256)
-        #   handler: handleLogMatch
-        # - event: LogMatchingEnabled(bool)
-        #   handler: handleLogMatchingEnabled
-        # - event: LogMinSell(address,uint256)
-        #   handler: handleLogMinSell
-        # - event: LogNote(indexed bytes4,indexed address,indexed bytes32,indexed bytes32,uint256,bytes)
-        #   handler: handleLogNote
+        - event: LogMatch(uint256,uint256)
+          handler: handleLogMatch
+        - event: LogMatchingEnabled(bool)
+          handler: handleLogMatchingEnabled
+        - event: LogMinSell(address,uint256)
+          handler: handleLogMinSell
+        - event: LogNote(indexed bytes4,indexed address,indexed bytes32,indexed bytes32,uint256,bytes)
+          handler: handleLogNote
         - event: LogSetAuthority(indexed address)
           handler: handleLogSetAuthority
         - event: LogSetOwner(indexed address)
           handler: handleLogSetOwner
-        # - event: LogSortedOffer(uint256)
-        #   handler: handleLogSortedOffer
+        - event: LogSortedOffer(uint256)
+          handler: handleLogSortedOffer
         - event: LogTake(bytes32,indexed bytes32,indexed address,address,address,indexed address,uint128,uint128,uint64)
           handler: handleLogTake
-        # - event: LogTrade(uint256,indexed address,uint256,indexed address)
-        #   handler: handleLogTrade
-        # - event: LogUnsortedOffer(uint256)
-        #   handler: handleLogUnsortedOffer
-        # - event: OfferDeleted(uint256)
-        #   handler: handleOfferDeleted
+        - event: LogTrade(uint256,indexed address,uint256,indexed address)
+          handler: handleLogTrade
+        - event: LogUnsortedOffer(uint256)
+          handler: handleLogUnsortedOffer
+        - event: OfferDeleted(uint256)
+          handler: handleOfferDeleted
