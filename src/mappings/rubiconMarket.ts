@@ -297,15 +297,19 @@ export function handleLogSetOwner(event: LogSetOwner): void {
   let rubiconMarket = createRubiconMarket(rubiconMarketAddy, event)
   rubiconMarket.save()
 
+  log.warning(`RubiconMarket address:  \n`, [rubiconMarketAddy.toHexString()])
+
   // For `LogSetOwner` entity.
   let logSetOwnerID = event.params._event.address.toHexString(),
     // Create new LogSetOwner entity.
     logSetOwner = new LogSetOwnerEntity(logSetOwnerID)
 
   logSetOwner.id = logSetOwnerID + '-' + event.params._event.transaction.hash.toHexString()
-
   // logSetOwner.id = null
   logSetOwner.owner = event.params.owner
+
+  log.warning(`RubiconMarket owner: \n`, [event.params.owner.toHexString()])
+
   logSetOwner.save()
 }
 
