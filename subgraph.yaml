@@ -8,7 +8,7 @@ dataSources:
     network: optimism-kovan
     source:
       # This is a proxy address
-      address: "" 
+      address: "0x5ddDa7DF721272106af1904abcc64E76AB2019d2" 
       abi: RubiconMarket
       startBlock: 1577110
     mapping: 
