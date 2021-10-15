@@ -21,7 +21,6 @@ import {
   LogUnsortedOffer,
   OfferDeleted
 } from "../../generated/RubiconMarket/RubiconMarket"
-import { RubiconMarket } from '../../generated/templates'
 import {
   FeeTake as FeeTakeEntity,
   LogBump as LogBumpEntity,
@@ -45,7 +44,7 @@ import {
   OfferDeleted as OfferDeletedEntity,
   UserTrade as UserTradeEntity
 } from "../../generated/schema"
-import { createRubiconMarket, zeroAddress } from "./helpers"
+import { /* createRubiconMarket, */ zeroAddress } from "./helpers"
 
 
 export function handleFeeTake(event: FeeTake): void {
@@ -129,7 +128,7 @@ export function handleLogInt(event: LogInt): void {
   logInt.save()
 }
 
-export function handleItemUpdate(event: LogItemUpdate): void {
+export function handleLogItemUpdate(event: LogItemUpdate): void {
   let ep = event.params,
     logItemUpdateID = ep._event.address.toHexString(),
     logItemUpdate = new LogItemUpdateEntity(logItemUpdateID)
@@ -293,10 +292,10 @@ export function handleLogSetAuthority(event: LogSetAuthority): void {
 
 
 export function handleLogSetOwner(event: LogSetOwner): void {
-  let rubiconMarketAddy = event.params._event.address
-  RubiconMarket.create(rubiconMarketAddy)
-  let rubiconMarket = createRubiconMarket(rubiconMarketAddy, event)
-  rubiconMarket.save()
+  // let rubiconMarketAddy = event.params._event.address
+  // RubiconMarket.create(rubiconMarketAddy)
+  // let rubiconMarket = createRubiconMarket(rubiconMarketAddy, event)
+  // rubiconMarket.save()
 
   // For `LogSetOwner` entity.
   let logSetOwnerID = event.params._event.address.toHexString(),
@@ -319,6 +318,22 @@ export function handleLogSortedOffer(event: LogSortedOffer): void {
   logSortedOffer.id = lsoID + '-' + ep._event.transaction.hash.toHexString()
   // same as logSortedOffer.id
   logSortedOffer.logSortedOfferID = lsoID + '-' + ep._event.transaction.hash.toHexString()
+}
+
+export function handleLogTrade(event: LogTrade): void {
+  let ep = event.params,
+    logTradeID = ep._event.address.toHexString(),
+    // Create new LogTake entity
+    logTrade = new LogTradeEntity(logTradeID)
+
+  logTrade.id = logTradeID + '-' + ep._event.transaction.hash.toHexString()
+  // same as logSortedOffer.id
+  logTrade.buy_amt = ep.buy_amt
+  logTrade.buy_gem = ep.buy_gem
+  logTrade.pay_amt = ep.pay_amt
+  logTrade.pay_gem = ep.pay_gem
+
+  logTrade.save()
 }
 
 export function handleLogTake(event: LogTake): void {
