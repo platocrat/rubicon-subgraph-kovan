@@ -43,7 +43,7 @@ import {
   LogTrade as LogTradeEntity,
   LogUnsortedOffer as LogUnsortedOfferEntity,
   OfferDeleted as OfferDeletedEntity,
-  UserTrade
+  UserTrade as UserTradeEntity
 } from "../../generated/schema"
 import { createRubiconMarket, zeroAddress } from "./helpers"
 
@@ -148,7 +148,7 @@ export function handleLogKill(event: LogKill): void {
     logKill = new LogKillEntity(lkID)
 
   // For `UserTrade` entity.
-  let userTrade = UserTrade.load(lkID)
+  let userTrade = UserTradeEntity.load(lkID)
 
   logKill.id = lkID + '-' + ep._event.transaction.hash.toHexString()
   logKill.pair = ep.pair
@@ -183,10 +183,11 @@ export function handleLogKill(event: LogKill): void {
     userTrade.timestamp = ep.timestamp
     // Update to the transaction hash of this emitted LogKill event.
     userTrade.transactionHash = ep._event.transaction.hash
+
+    userTrade.save()
   }
 
   logKill.save()
-  userTrade.save()
 }
 
 export function handleLogMake(event: LogMake): void {
@@ -197,7 +198,7 @@ export function handleLogMake(event: LogMake): void {
     logMake = new LogMakeEntity(lmID)
 
   // For `UserTrade` entity.
-  let userTrade = new UserTrade(lmID)
+  let userTrade = new UserTradeEntity(lmID)
 
   logMake.id = lmID + '-' + ep._event.transaction.hash.toHexString()
   logMake.pair = ep.pair
@@ -297,8 +298,6 @@ export function handleLogSetOwner(event: LogSetOwner): void {
   let rubiconMarket = createRubiconMarket(rubiconMarketAddy, event)
   rubiconMarket.save()
 
-  log.warning(`RubiconMarket address:  \n`, [rubiconMarketAddy.toHexString()])
-
   // For `LogSetOwner` entity.
   let logSetOwnerID = event.params._event.address.toHexString(),
     // Create new LogSetOwner entity.
@@ -307,8 +306,6 @@ export function handleLogSetOwner(event: LogSetOwner): void {
   logSetOwner.id = logSetOwnerID + '-' + event.params._event.transaction.hash.toHexString()
   // logSetOwner.id = null
   logSetOwner.owner = event.params.owner
-
-  log.warning(`RubiconMarket owner: \n`, [event.params.owner.toHexString()])
 
   logSetOwner.save()
 }
@@ -331,7 +328,7 @@ export function handleLogTake(event: LogTake): void {
     logTake = new LogTakeEntity(ltID)
 
   // For `UserTrade` entity.
-  let userTrade = UserTrade.load(ltID)
+  let userTrade = UserTradeEntity.load(ltID)
 
   logTake.id = ltID + '-' + ep._event.transaction.hash.toHexString()
   logTake.pair = ep.pair
@@ -364,10 +361,11 @@ export function handleLogTake(event: LogTake): void {
     userTrade.timestamp = ep.timestamp
     // Update to the transaction hash of this emitted LogMake event.
     userTrade.transactionHash = ep._event.transaction.hash
+
+    userTrade.save()
   }
 
   logTake.save()
-  userTrade.save()
 }
 
 export function handleTradeell(event: LogTrade): void {

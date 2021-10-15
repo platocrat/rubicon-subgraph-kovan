@@ -1,4 +1,4 @@
-import { Address } from "@graphprotocol/graph-ts";
+import { Address, Bytes } from "@graphprotocol/graph-ts";
 import { RubiconMarket as RubiconMarketSchema } from "../../generated/schema";
 import { Implementation } from "../../generated/TransparentUpgradeableProxy/TransparentUpgradeableProxy";
 import { RubiconMarket } from "../../generated/templates/RubiconMarket/RubiconMarket";
@@ -20,9 +20,11 @@ export function createRubiconMarket(
 
   rubiconMarket.id = _rubiconMarketAddress.toHexString()
 
-  owner.reverted
-    ? rubiconMarket.owner = Address.fromString('0x0000000000000000000000000000000000000000')
-    : rubiconMarket.owner = owner.value
+  if (owner.reverted) {
+    rubiconMarket.owner = Address.fromString('0x0000000000000000000000000000000000000000')
+  } else {
+    rubiconMarket.owner = owner.value
+  }
 
   return rubiconMarket as RubiconMarketSchema
 }
