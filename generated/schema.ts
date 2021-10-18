@@ -404,7 +404,6 @@ export class LogDelete extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("keeper", Value.fromBytes(Bytes.empty()));
-    this.set("logDeleteID", Value.fromString(""));
   }
 
   save(): void {
@@ -441,15 +440,6 @@ export class LogDelete extends Entity {
   set keeper(value: Bytes) {
     this.set("keeper", Value.fromBytes(value));
   }
-
-  get logDeleteID(): string {
-    let value = this.get("logDeleteID");
-    return value!.toString();
-  }
-
-  set logDeleteID(value: string) {
-    this.set("logDeleteID", Value.fromString(value));
-  }
 }
 
 export class LogInsert extends Entity {
@@ -458,7 +448,6 @@ export class LogInsert extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("keeper", Value.fromBytes(Bytes.empty()));
-    this.set("logInsertID", Value.fromString(""));
   }
 
   save(): void {
@@ -494,15 +483,6 @@ export class LogInsert extends Entity {
 
   set keeper(value: Bytes) {
     this.set("keeper", Value.fromBytes(value));
-  }
-
-  get logInsertID(): string {
-    let value = this.get("logInsertID");
-    return value!.toString();
-  }
-
-  set logInsertID(value: string) {
-    this.set("logInsertID", Value.fromString(value));
   }
 }
 
@@ -564,8 +544,6 @@ export class LogItemUpdate extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("logItemUpdateID", Value.fromString(""));
   }
 
   save(): void {
@@ -592,15 +570,6 @@ export class LogItemUpdate extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get logItemUpdateID(): string {
-    let value = this.get("logItemUpdateID");
-    return value!.toString();
-  }
-
-  set logItemUpdateID(value: string) {
-    this.set("logItemUpdateID", Value.fromString(value));
   }
 }
 
@@ -837,7 +806,6 @@ export class LogMatch extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("logMatchID", Value.fromString(""));
     this.set("amount", Value.fromBigInt(BigInt.zero()));
   }
 
@@ -865,15 +833,6 @@ export class LogMatch extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get logMatchID(): string {
-    let value = this.get("logMatchID");
-    return value!.toString();
-  }
-
-  set logMatchID(value: string) {
-    this.set("logMatchID", Value.fromString(value));
   }
 
   get amount(): BigInt {
@@ -1178,8 +1137,6 @@ export class LogSortedOffer extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("logSortedOfferID", Value.fromString(""));
   }
 
   save(): void {
@@ -1206,15 +1163,6 @@ export class LogSortedOffer extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get logSortedOfferID(): string {
-    let value = this.get("logSortedOfferID");
-    return value!.toString();
-  }
-
-  set logSortedOfferID(value: string) {
-    this.set("logSortedOfferID", Value.fromString(value));
   }
 }
 
@@ -1420,8 +1368,6 @@ export class LogUnsortedOffer extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("logUnsortedOfferID", Value.fromString(""));
   }
 
   save(): void {
@@ -1451,23 +1397,12 @@ export class LogUnsortedOffer extends Entity {
   set id(value: string) {
     this.set("id", Value.fromString(value));
   }
-
-  get logUnsortedOfferID(): string {
-    let value = this.get("logUnsortedOfferID");
-    return value!.toString();
-  }
-
-  set logUnsortedOfferID(value: string) {
-    this.set("logUnsortedOfferID", Value.fromString(value));
-  }
 }
 
 export class OfferDeleted extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("offerDeletedID", Value.fromString(""));
   }
 
   save(): void {
@@ -1494,15 +1429,6 @@ export class OfferDeleted extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get offerDeletedID(): string {
-    let value = this.get("offerDeletedID");
-    return value!.toString();
-  }
-
-  set offerDeletedID(value: string) {
-    this.set("offerDeletedID", Value.fromString(value));
   }
 }
 

@@ -51,16 +51,12 @@ type LogDelete @entity {
   "ID of this entity"
   id: ID!
   keeper: Bytes!
-  "ID given to this event by the contract"
-  logDeleteID: String! 
 }
 
 type LogInsert @entity {
   "ID of this entity"
   id: ID!
   keeper: Bytes!
-  "ID given to this event by the contract"
-  logInsertID: String! 
 }
 
 type LogInt @entity {
@@ -72,8 +68,6 @@ type LogInt @entity {
 type LogItemUpdate @entity {
   "ID of this entity"
   id: ID!
-  "ID given to this event by the contract"
-  logItemUpdateID: String!
 }
 
 type LogKill @entity {
@@ -103,8 +97,6 @@ type LogMake @entity {
 type LogMatch @entity {
   "ID of this entity"
   id: ID!
-  "ID given to this event by the contract"
-  logMatchID: String!
   amount: BigInt!
 }
 
@@ -145,8 +137,6 @@ type LogSetOwner @entity {
 type LogSortedOffer @entity {
   "ID of this entity"
   id: ID!
-  "ID given to this event by the contract"
-  logSortedOfferID: String!
 }
 
 type LogTake @entity {
@@ -177,14 +167,10 @@ type LogTrade @entity {
 type LogUnsortedOffer @entity {
   "ID of this entity"
   id: ID!
-  "ID given to this event by the contract"
-  logUnsortedOfferID: String!
 }
 
 type OfferDeleted @entity {
   id: ID!
-  "ID given to this event by the contract"
-  offerDeletedID: String!
 }
 
 

@@ -52,7 +52,7 @@ export function handleFeeTake(event: FeeTake): void {
     feeTakeID = ep.id.toHexString(),
     feeTake = new FeeTakeEntity(feeTakeID)
 
-  feeTake.id = feeTakeID + '-' + ep._event.transaction.hash.toHexString()
+  feeTake.id = feeTakeID
   feeTake.pair = ep.pair
   feeTake.asset = ep.asset
   feeTake.taker = ep.taker
@@ -68,7 +68,7 @@ export function handleLogBump(event: LogBump): void {
     logBumpID = ep.id.toHexString(),
     logBump = new LogBumpEntity(logBumpID)
 
-  logBump.id = logBumpID + '-' + ep._event.transaction.hash.toHexString()
+  logBump.id = logBumpID
   logBump.pair = ep.pair
   logBump.maker = ep.maker
   logBump.pay_gem = ep.pay_gem
@@ -84,7 +84,7 @@ export function handleLogBuyEnabled(event: LogBuyEnabled): void {
     logBuyEnabledID = ep._event.address.toHexString(),
     logBuyEnabled = new LogBuyEnabledEntity(logBuyEnabledID)
 
-  logBuyEnabled.id = logBuyEnabledID + '-' + ep._event.transaction.hash.toHexString()
+  logBuyEnabled.id = ep._event.transaction.hash.toHexString()
   logBuyEnabled.isEnabled = true
 
   logBuyEnabled.save()
@@ -92,26 +92,22 @@ export function handleLogBuyEnabled(event: LogBuyEnabled): void {
 
 export function handleLogDelete(event: LogDelete): void {
   let ep = event.params,
-    logDeleteID = ep._event.address.toHexString(),
+    logDeleteID = ep.id.toHexString(),
     logDelete = new LogDeleteEntity(logDeleteID)
 
-  logDelete.id = logDeleteID + '-' + ep._event.transaction.hash.toHexString()
+  logDelete.id = logDeleteID
   logDelete.keeper = ep.keeper
-  // same as logDelete.id
-  logDelete.logDeleteID = logDeleteID + '-' + ep._event.transaction.hash.toHexString()
 
   logDelete.save()
 }
 
 export function handleLogInsert(event: LogInsert): void {
   let ep = event.params,
-    logInsertID = ep._event.address.toHexString(),
+    logInsertID = ep.id.toHexString(),
     logInsert = new LogInsertEntity(logInsertID)
 
-  logInsert.id = logInsertID + '-' + ep._event.transaction.hash.toHexString()
+  logInsert.id = logInsertID
   logInsert.keeper = ep.keeper
-  // same as logInsert.id
-  logInsert.logInsertID = logInsertID + '-' + ep._event.transaction.hash.toHexString()
 
   logInsert.save()
 }
@@ -121,7 +117,7 @@ export function handleLogInt(event: LogInt): void {
     logIntID = ep._event.address.toHexString(),
     logInt = new LogIntEntity(logIntID)
 
-  logInt.id = logIntID + '-' + ep._event.transaction.hash.toHexString()
+  logInt.id = ep._event.transaction.hash.toHexString()
   logInt.lol = ep.lol
   logInt.input = ep.input
 
@@ -130,12 +126,10 @@ export function handleLogInt(event: LogInt): void {
 
 export function handleLogItemUpdate(event: LogItemUpdate): void {
   let ep = event.params,
-    logItemUpdateID = ep._event.address.toHexString(),
+    logItemUpdateID = ep.id.toHexString(),
     logItemUpdate = new LogItemUpdateEntity(logItemUpdateID)
 
-  logItemUpdate.id = logItemUpdateID + '-' + ep._event.transaction.hash.toHexString()
-  // same as logItemUpdate.id
-  logItemUpdate.logItemUpdateID = logItemUpdateID + '-' + ep._event.transaction.hash.toHexString()
+  logItemUpdate.id = logItemUpdateID
 
   logItemUpdate.save()
 }
@@ -149,7 +143,7 @@ export function handleLogKill(event: LogKill): void {
   // For `UserTrade` entity.
   let userTrade = UserTradeEntity.load(lkID)
 
-  logKill.id = lkID + '-' + ep._event.transaction.hash.toHexString()
+  logKill.id = lkID
   logKill.pair = ep.pair
   logKill.maker = ep.maker
   logKill.pay_gem = ep.pay_gem
@@ -162,7 +156,7 @@ export function handleLogKill(event: LogKill): void {
   if (userTrade != null) {
     // If the trade is killed, we update the `id` of the UserTrade entity
     // to the `id` of the emitted LogKill event.
-    userTrade.id = lkID + '-' + ep._event.transaction.hash.toHexString()
+    userTrade.id = lkID
     userTrade.isLimit = false
     userTrade.maker = ep.maker
     userTrade.taker = userTrade.taker
@@ -199,7 +193,7 @@ export function handleLogMake(event: LogMake): void {
   // For `UserTrade` entity.
   let userTrade = new UserTradeEntity(lmID)
 
-  logMake.id = lmID + '-' + ep._event.transaction.hash.toHexString()
+  logMake.id = lmID
   logMake.pair = ep.pair
   logMake.maker = ep.maker
   logMake.pay_gem = ep.pay_gem
@@ -210,7 +204,7 @@ export function handleLogMake(event: LogMake): void {
   logMake.transactionHash = ep._event.transaction.hash
 
   // Set to the `id` of the emitted LogMake event.
-  userTrade.id = lmID + '-' + ep._event.transaction.hash.toHexString()
+  userTrade.id = lmID
   userTrade.isLimit = true
   userTrade.maker = ep.maker
   userTrade.taker = Address.fromString(zeroAddress)
@@ -229,12 +223,10 @@ export function handleLogMake(event: LogMake): void {
 
 export function handleLogMatch(event: LogMatch): void {
   let ep = event.params,
-    logMatchID = ep._event.address.toHexString(),
+    logMatchID = ep.id.toHexString(),
     logMatch = new LogMatchEntity(logMatchID)
 
-  logMatch.id = logMatchID + '-' + ep._event.transaction.hash.toHexString()
-  // same as logMatch.id
-  logMatch.logMatchID = logMatchID + '-' + ep._event.transaction.hash.toHexString()
+  logMatch.id = logMatchID
   logMatch.amount = ep.amount
 
   logMatch.save()
@@ -242,10 +234,10 @@ export function handleLogMatch(event: LogMatch): void {
 
 export function handleMatchingEnabled(event: LogMatchingEnabled): void {
   let ep = event.params,
-    logMatchingEnabledID = ep._event.address.toHexString(),
+    logMatchingEnabledID = ep._event.transaction.hash.toHexString(),
     logMatchingEnabled = new LogMatchingEnabledEntity(logMatchingEnabledID)
 
-  logMatchingEnabled.id = logMatchingEnabledID + '-' + ep._event.transaction.hash.toHexString()
+  logMatchingEnabled.id = logMatchingEnabledID
   logMatchingEnabled.isEnabled = ep.isEnabled
 
   logMatchingEnabled.save()
@@ -253,10 +245,10 @@ export function handleMatchingEnabled(event: LogMatchingEnabled): void {
 
 export function handleLogMinSell(event: LogMinSell): void {
   let ep = event.params,
-    logMinSellID = ep._event.address.toHexString(),
+    logMinSellID = ep._event.transaction.hash.toHexString(),
     logMinSell = new LogMinSellEntity(logMinSellID)
 
-  logMinSell.id = logMinSellID + '-' + ep._event.transaction.hash.toHexString()
+  logMinSell.id = logMinSellID
   logMinSell.pay_gem = ep.pay_gem
   logMinSell.min_amount = ep.min_amount
 
@@ -265,10 +257,10 @@ export function handleLogMinSell(event: LogMinSell): void {
 
 export function handleLogNote(event: LogNote): void {
   let ep = event.params,
-    logNoteID = ep._event.address.toHexString(),
+    logNoteID = ep._event.transaction.hash.toHexString(),
     logNote = new LogNoteEntity(logNoteID)
 
-  logNote.id = logNoteID + '-' + ep._event.transaction.hash.toHexString()
+  logNote.id = logNoteID
   logNote.sig = ep.sig
   logNote.guy = ep.guy
   logNote.foo = ep.foo
@@ -281,10 +273,10 @@ export function handleLogNote(event: LogNote): void {
 
 export function handleLogSetAuthority(event: LogSetAuthority): void {
   let ep = event.params,
-    logSetAuthorityID = ep._event.address.toHexString(),
+    logSetAuthorityID = ep._event.transaction.hash.toHexString(),
     logSetAuthority = new LogSetAuthorityEntity(logSetAuthorityID)
 
-  logSetAuthority.id = logSetAuthorityID + '-' + ep._event.transaction.hash.toHexString()
+  logSetAuthority.id = ep._event.transaction.hash.toHexString()
   logSetAuthority.authority = ep.authority
 
   logSetAuthority.save()
@@ -298,12 +290,11 @@ export function handleLogSetOwner(event: LogSetOwner): void {
   // rubiconMarket.save()
 
   // For `LogSetOwner` entity.
-  let logSetOwnerID = event.params._event.address.toHexString(),
+  let logSetOwnerID = event.params._event.transaction.hash.toHexString(),
     // Create new LogSetOwner entity.
     logSetOwner = new LogSetOwnerEntity(logSetOwnerID)
 
-  logSetOwner.id = logSetOwnerID + '-' + event.params._event.transaction.hash.toHexString()
-  // logSetOwner.id = null
+  logSetOwner.id = logSetOwnerID
   logSetOwner.owner = event.params.owner
 
   logSetOwner.save()
@@ -315,19 +306,16 @@ export function handleLogSortedOffer(event: LogSortedOffer): void {
     // Create new LogTake entity
     logSortedOffer = new LogSortedOfferEntity(lsoID)
 
-  logSortedOffer.id = lsoID + '-' + ep._event.transaction.hash.toHexString()
-  // same as logSortedOffer.id
-  logSortedOffer.logSortedOfferID = lsoID + '-' + ep._event.transaction.hash.toHexString()
+  logSortedOffer.id = lsoID
 }
 
 export function handleLogTrade(event: LogTrade): void {
   let ep = event.params,
-    logTradeID = ep._event.address.toHexString(),
+    logTradeID = ep._event.transaction.hash.toHexString(),
     // Create new LogTake entity
     logTrade = new LogTradeEntity(logTradeID)
 
-  logTrade.id = logTradeID + '-' + ep._event.transaction.hash.toHexString()
-  // same as logSortedOffer.id
+  logTrade.id = logTradeID
   logTrade.buy_amt = ep.buy_amt
   logTrade.buy_gem = ep.buy_gem
   logTrade.pay_amt = ep.pay_amt
@@ -345,7 +333,7 @@ export function handleLogTake(event: LogTake): void {
   // For `UserTrade` entity.
   let userTrade = UserTradeEntity.load(ltID)
 
-  logTake.id = ltID + '-' + ep._event.transaction.hash.toHexString()
+  logTake.id = ltID
   logTake.pair = ep.pair
   logTake.maker = ep.maker
   logTake.taker = ep.taker
@@ -358,7 +346,7 @@ export function handleLogTake(event: LogTake): void {
 
   if (userTrade != null) {
     // Update to the `id` of the emitted LogTake event.
-    userTrade.id = ltID + '-' + ep._event.transaction.hash.toHexString()
+    userTrade.id = ltID
     userTrade.isLimit = false
     userTrade.maker = ep.maker
     userTrade.taker = ep.taker
@@ -385,10 +373,10 @@ export function handleLogTake(event: LogTake): void {
 
 export function handleTradeell(event: LogTrade): void {
   let ep = event.params,
-    logTradeID = ep._event.address.toHexString(),
+    logTradeID = ep._event.transaction.hash.toHexString(),
     logTrade = new LogTradeEntity(logTradeID)
 
-  logTrade.id = logTradeID + '-' + ep._event.transaction.hash.toHexString()
+  logTrade.id = logTradeID
   logTrade.pay_gem = ep.pay_gem
   logTrade.pay_gem = ep.pay_gem
   logTrade.buy_amt = ep.buy_amt
@@ -399,21 +387,17 @@ export function handleTradeell(event: LogTrade): void {
 
 export function handleLogUnsortedOffer(event: LogUnsortedOffer): void {
   let ep = event.params,
-    logUnsortedOfferID = ep._event.address.toHexString(),
+    logUnsortedOfferID = ep.id.toHexString(),
     logUnsortedOffer = new LogUnsortedOfferEntity(logUnsortedOfferID)
 
-  logUnsortedOffer.id = logUnsortedOfferID + '-' + ep._event.transaction.hash.toHexString()
-  // same as logUnsortedOffer.id
-  logUnsortedOffer.logUnsortedOfferID = logUnsortedOfferID + '-' + ep._event.transaction.hash.toHexString()
-
+  logUnsortedOffer.id = logUnsortedOfferID
   logUnsortedOffer.save()
 }
 
 export function handleOfferDeleted(event: OfferDeleted): void {
   let ep = event.params,
-    offerDeletedID = ep._event.address.toHexString(),
+    offerDeletedID = ep.id.toHexString(),
     offerDeleted = new OfferDeletedEntity(offerDeletedID)
 
-  offerDeleted.id = offerDeletedID + '-' + ep._event.transaction.hash.toHexString()
-  offerDeleted.offerDeletedID = offerDeleted.id
+  offerDeleted.id = offerDeletedID
 }
