@@ -1,13 +1,13 @@
 {
-  "name": "rubicon-subgraph-kovan-v2",
+  "name": "rubicon-subgraph-kovan",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ platocrat/rubicon-kovan-subgraph-v2",
-    "create-local": "graph create --node http://localhost:8020/ platocrat/rubicon-kovan-subgraph-v2",
-    "remove-local": "graph remove --node http://localhost:8020/ platocrat/rubicon-kovan",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 platocrat/rubicon-kovan-subgraph-v2"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ platocrat/rubicon-subgraph-kovan",
+    "create-local": "graph create --node http://localhost:8020/ platocrat/rubicon-subgraph-kovan",
+    "remove-local": "graph remove --node http://localhost:8020/ platocrat/rubicon-subgraph-kovan",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 platocrat/rubicon-subgraph-kovan"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.22.3",
